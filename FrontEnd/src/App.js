@@ -10,6 +10,7 @@ import {
   taskCompleted,
 } from "./api/todoAPI";
 import ProductiveDay from "./components/ProductiveDay";
+import Analytics from "./components/Analytics/Analytics";
 
 const App = () => {
   const url = "http://localhost:80";
@@ -83,7 +84,7 @@ const App = () => {
     try {
       const data = await removeTodoAPI(id);
       getAllTodo();
-    } catch (err) {}
+    } catch (err) { }
   };
 
   const onUpdateTodo = async (task) => {
@@ -144,9 +145,16 @@ const App = () => {
                       Most Productive Days
                     </button>
                   </li>
+                  <li role="presentation" className="nav-item completed-task">
+                    <button className="nav-link" onClick={() => setView(5)}>
+                      Analytics
+                    </button>
+                  </li>
                 </ul>
                 {view === 4 ? (
                   <ProductiveDay task={prodDate} />
+                ) : view === 5 ? (
+                  <Analytics />
                 ) : (
                   <div className="todo-list">
                     {task.map((task) => {
